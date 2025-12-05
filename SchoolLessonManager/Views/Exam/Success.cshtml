@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Uğurlu qeydiyyat";
+}
+
+<style>
+    body {
+        background: url('https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center fixed;
+        background-size: cover;
+        backdrop-filter: blur(2px);
+    }
+
+    .success-box {
+        background: rgba(255, 255, 255, 0.90);
+        padding: 40px;
+        border-radius: 14px;
+        max-width: 600px;
+        margin: 120px auto;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0,0,0,0.25);
+        animation: fadeIn 0.6s ease;
+    }
+
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .icon {
+        font-size: 60px;
+        color: #28a745;
+    }
+</style>
+
+<div class="success-box">
+    <div class="icon">✔️</div>
+
+    <h2 class="text-success mb-3">İmtahan uğurla qeydiyyata alındı!</h2>
+
+    <p id="countdown" class="text-secondary">
+        4 saniyə sonra ana səhifəyə yönləndiriləcəksiniz...
+    </p>
+
+    <a class="btn btn-primary mt-3" href="/">Ana Səhifəyə Qayıt</a>
+</div>
+
+<script>
+    let time = 4;
+    const countdown = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+        time--;
+        countdown.innerText = `${time} saniyə sonra ana səhifəyə yönləndiriləcəksiniz...`;
+
+        if (time === 0) {
+            clearInterval(timer);
+            window.location.href = '/';
+        }
+    }, 1000);
+</script>

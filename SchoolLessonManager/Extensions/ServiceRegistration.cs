@@ -27,6 +27,7 @@ namespace SchoolLessonManager.Presentation.Extensions
             services.AddScoped<ILessonRegistrationService, LessonRegistrationService>();
             services.AddScoped<IStudentRegistrationService, StudentRegistrationService>();
             services.AddScoped<IExamRegistrationService, ExamRegistrationService>();
+            services.AddSession();
         }
     }
 }

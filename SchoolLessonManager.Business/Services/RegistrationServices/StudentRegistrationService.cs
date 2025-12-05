@@ -17,18 +17,25 @@ namespace SchoolLessonManager.Business.Services.RegistrationServices
 
         public async Task<Response<Student>> RegisterAsync(Student student)
         {
-            var response = await _studentService.AddAsync(student);
-
-            if (!response.IsSuccessfully)
+            try
             {
-                var error = response.Errors?.FirstOrDefault() ?? "Unknown error";
-                return Response<Student>.Fail(error, HttpStatusCode.BadRequest.GetHashCode());
+                var response = await _studentService.AddAsync(student);
+
+                if (!response.IsSuccessfully)
+                {
+                    var error = response.Errors?.FirstOrDefault() ?? "Naməlum xəta";
+                    return Response<Student>.Fail(error, HttpStatusCode.BadRequest.GetHashCode());
+                }
+
+                if (response.Data == null)
+                    return Response<Student>.Fail("Şagird məlumatı boşdu", HttpStatusCode.BadRequest.GetHashCode());
+
+                return Response<Student>.Success(response.Data, HttpStatusCode.OK.GetHashCode());
             }
-
-            if (response.Data == null)
-                return Response<Student>.Fail("Student data is null", HttpStatusCode.BadRequest.GetHashCode());
-
-            return Response<Student>.Success(response.Data, HttpStatusCode.OK.GetHashCode());
+            catch (Exception ex)
+            {
+                return Response<Student>.Fail(ex.Message ?? "Gözlənilməz xəta baş verdi", HttpStatusCode.BadRequest.GetHashCode());
+            }
         }
     }
 }

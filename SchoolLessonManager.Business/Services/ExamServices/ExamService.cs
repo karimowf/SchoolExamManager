@@ -18,41 +18,59 @@ namespace SchoolLessonManager.Business.Services.ExamServices
 
         public async Task<Response<Exam>> AddExamAsync(Exam exam)
         {
-            await _unitOfWork.ExamRepository.AddExamAsync(exam);
-            await _unitOfWork.CommitAsync();
+            try
+            {
+                await _unitOfWork.ExamRepository.AddExamAsync(exam);
+                await _unitOfWork.CommitAsync();
 
-            return Response<Exam>.Success(exam, HttpStatusCode.OK.GetHashCode());
+                return Response<Exam>.Success(exam, HttpStatusCode.OK.GetHashCode());
+            }
+            catch (Exception ex)
+            {
+                return Response<Exam>.Fail(
+                    ex.Message ?? "Gözlənilməz xəta baş verdi",
+                    HttpStatusCode.BadRequest.GetHashCode()
+                );
+            }
         }
 
-        public async Task<List<Exam>> GetFilteredAsync(
-       string? lesson,
-       string? student,
-       DateTime? from,
-       DateTime? to)
+        public async Task<Response<List<Exam>>> GetFilteredAsync(string? lesson, string? student, DateTime? from, DateTime? to)
         {
-            var query = _unitOfWork.ExamRepository.GetAllQueryable();
-
-            if (!string.IsNullOrWhiteSpace(lesson))
+            try
             {
-                query = query.Where(e =>
-                    e.Lesson.Name.Contains(lesson) ||
-                    e.Lesson.Code.Contains(lesson));
-            }
+                var query = _unitOfWork.ExamRepository.GetAllQueryable();
 
-            if (!string.IsNullOrWhiteSpace(student))
+                if (!string.IsNullOrWhiteSpace(lesson))
+                {
+                    query = query.Where(e =>
+                        e.Lesson.Name.Contains(lesson) ||
+                        e.Lesson.Code.Contains(lesson));
+                }
+
+                if (!string.IsNullOrWhiteSpace(student))
+                {
+                    query = query.Where(e =>
+                        e.Student.FirstName.Contains(student) ||
+                        e.Student.LastName.Contains(student));
+                }
+
+                if (from.HasValue)
+                    query = query.Where(e => e.ExamDate >= from.Value);
+
+                if (to.HasValue)
+                    query = query.Where(e => e.ExamDate <= to.Value);
+
+                var data = await query.ToListAsync();
+
+                return Response<List<Exam>>.Success(data, HttpStatusCode.OK.GetHashCode());
+            }
+            catch (Exception ex)
             {
-                query = query.Where(e =>
-                    e.Student.FirstName.Contains(student) ||
-                    e.Student.LastName.Contains(student));
+                return Response<List<Exam>>.Fail(
+                    ex.Message ?? "Gözlənilməz xəta baş verdi",
+                    HttpStatusCode.BadRequest.GetHashCode()
+                );
             }
-
-            if (from.HasValue)
-                query = query.Where(e => e.ExamDate >= from.Value);
-
-            if (to.HasValue)
-                query = query.Where(e => e.ExamDate <= to.Value);
-
-            return await query.ToListAsync();
         }
     }
 }

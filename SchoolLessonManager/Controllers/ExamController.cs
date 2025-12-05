@@ -21,6 +21,23 @@ namespace SchoolLessonManager.Presentation.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            var sessionLesson = HttpContext.Session.GetString("LessonCode");
+            var sessionStudent = HttpContext.Session.GetString("StudentNumber");
+
+            int.TryParse(sessionStudent, out int sessionStudentNumber);
+
+            if (sessionLesson != model.LessonCode)
+            {
+                ModelState.AddModelError("", "Daxil edilən dərs kodu əvvəlki mərhələdə seçilən dərslə uyğun gəlmir.");
+                return View(model);
+            }
+
+            if (sessionStudentNumber != model.StudentNumber)
+            {
+                ModelState.AddModelError("", "Daxil edilən şagird nömrəsi əvvəlki mərhələdə seçilən şagirdlə uyğun gəlmir.");
+                return View(model);
+            }
+
             var exam = new Exam
             {
                 ExamDate = model.ExamDate,
@@ -35,12 +52,12 @@ namespace SchoolLessonManager.Presentation.Controllers
 
             if (!response.IsSuccessfully)
             {
-                var error = response.Errors?.FirstOrDefault() ?? "Unknown error";
+                var error = response.Errors?.FirstOrDefault() ?? "Gözlənilməz xəta baş verdi";
                 ModelState.AddModelError("", error);
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Success", "Exam");
         }
 
         [HttpGet]
@@ -53,6 +70,12 @@ namespace SchoolLessonManager.Presentation.Controllers
                 filter.To);
 
             return View(exams);
+        }
+
+        [HttpGet]
+        public IActionResult Success()
+        {
+            return View();
         }
     }
 }

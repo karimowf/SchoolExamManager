@@ -19,7 +19,7 @@ namespace SchoolLessonManager.DataAccess.Repositories.StudentRepositories
             await _context.Students.AddAsync(student);
         }
 
-        public async Task<Student?> GetByNumberAsync(int number)
+        public async Task<Student?> GetByNumberAsync(int? number)
         {
             return await _context.Students
                 .FirstOrDefaultAsync(s => s.Number == number);

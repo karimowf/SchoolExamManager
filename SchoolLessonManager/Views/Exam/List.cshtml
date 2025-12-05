@@ -3,8 +3,7 @@
 
 <style>
     body {
-        background: url('https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1920')
-                    no-repeat center center fixed;
+        background: url('https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center fixed;
         background-size: cover;
     }
 
@@ -27,7 +26,6 @@
 
     <h2>İmtahanlar</h2>
 
-    <!-- FILTER FORM -->
     <form method="get" class="row mb-4">
 
         <div class="col-3">
@@ -68,7 +66,6 @@
 
     </form>
 
-    <!-- RESULT TABLE -->
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -78,15 +75,27 @@
                 <th>Qiymət</th>
             </tr>
         </thead>
+
         <tbody>
-            @foreach (var e in Model)
+            @if (Model == null || !Model.Any())
             {
                 <tr>
-                    <td>@e.Lesson?.Name (@e.Lesson?.Code)</td>
-                    <td>@e.Student?.FirstName @e.Student?.LastName</td>
-                    <td>@e.ExamDate.ToShortDateString()</td>
-                    <td>@e.Score</td>
+                    <td colspan="4" class="text-center text-muted fw-bold">
+                        Heç bir imtahan tapılmadı.
+                    </td>
                 </tr>
+            }
+            else
+            {
+                foreach (var e in Model)
+                {
+                    <tr>
+                        <td>@e.Lesson?.Name (@e.Lesson?.Code)</td>
+                        <td>@e.Student?.FirstName @e.Student?.LastName</td>
+                        <td>@e.ExamDate?.ToShortDateString()</td>
+                        <td>@e.Score</td>
+                    </tr>
+                }
             }
         </tbody>
     </table>

@@ -11,66 +11,87 @@ namespace SchoolLessonManager.Business.Services.LessonServices
     {
         public async Task<Response<Lesson>> AddLessonAsync(Lesson lesson)
         {
-            var existLesson = await unitOfWork.LessonRepository.GetByCodeAsync(lesson.Code);
-            if (existLesson != null)
+            try
+            {
+                var existLesson = await unitOfWork.LessonRepository.GetByCodeAsync(lesson.Code);
+                if (existLesson != null)
+                {
+                    return Response<Lesson>.Fail("Bu kod ilə artıq dərs mövcuddur.", HttpStatusCode.BadRequest.GetHashCode());
+                }
+
+                await unitOfWork.LessonRepository.AddAsync(lesson);
+                await unitOfWork.CommitAsync();
+
+                return Response<Lesson>.Success(lesson, HttpStatusCode.OK.GetHashCode());
+            }
+            catch (Exception ex)
             {
                 return Response<Lesson>.Fail(
-                    "A lesson with this code already exists.",
-                    HttpStatusCode.BadRequest.GetHashCode()
-                );
+            ex.Message ?? "Gözlənilməz xəta baş verdi", HttpStatusCode.BadRequest.GetHashCode());
             }
-
-            await unitOfWork.LessonRepository.AddAsync(lesson);
-            await unitOfWork.CommitAsync();
-
-            return Response<Lesson>.Success(lesson, HttpStatusCode.OK.GetHashCode());
         }
 
-        public async Task<List<Lesson>> GetFilteredAsync(string? code, string? name, string? teacher, int? grade)
+        public async Task<Response<List<Lesson>>> GetFilteredAsync(string? code, string? name, string? teacher, int? grade)
         {
-            var query = unitOfWork.LessonRepository
-    .GetAllQueryable()
-    .AsQueryable();
-
-            query = query.Include(l => l.Teacher);
-
-            if (!string.IsNullOrWhiteSpace(code))
-                query = query.Where(l => l.Code.Contains(code));
-
-            if (!string.IsNullOrWhiteSpace(name))
-                query = query.Where(l => l.Name.Contains(name));
-
-            if (!string.IsNullOrWhiteSpace(teacher))
+            try
             {
-                query = query.Where(l =>
-                    (l.Teacher.FirstName + " " + l.Teacher.LastName)
-                        .Contains(teacher));
+                var query = unitOfWork.LessonRepository.GetAllQueryable().AsQueryable();
+
+                query = query.Include(l => l.Teacher);
+
+                if (!string.IsNullOrWhiteSpace(code))
+                    query = query.Where(l => l.Code.Contains(code));
+
+                if (!string.IsNullOrWhiteSpace(name))
+                    query = query.Where(l => l.Name.Contains(name));
+
+                if (!string.IsNullOrWhiteSpace(teacher))
+                {
+                    query = query.Where(l =>
+                        (l.Teacher.FirstName + " " + l.Teacher.LastName)
+                            .Contains(teacher));
+                }
+
+                if (grade.HasValue)
+                    query = query.Where(l => l.GradeLevel == grade.Value);
+
+                var data = await query.ToListAsync();
+
+                return Response<List<Lesson>>.Success(data, HttpStatusCode.OK.GetHashCode());
             }
-
-            if (grade.HasValue)
-                query = query.Where(l => l.GradeLevel == grade.Value);
-
-            return await query.ToListAsync();
+            catch (Exception ex)
+            {
+                return Response<List<Lesson>>.Fail( ex.Message ?? "Gözlənilməz xəta baş verdi",
+                    HttpStatusCode.BadRequest.GetHashCode());
+            }
         }
 
 
 
         public async Task<Response<Lesson>> GetByCodeAsync(string code)
         {
-            var lesson = await unitOfWork.LessonRepository.GetByCodeAsync(code);
-
-            if (lesson == null)
+            try
             {
-                return Response<Lesson>.Fail(
-                    "Lesson not found.",
-                    HttpStatusCode.BadRequest.GetHashCode()
+                var lesson = await unitOfWork.LessonRepository.GetByCodeAsync(code);
+
+                if (lesson == null)
+                {
+                    return Response<Lesson>.Fail(
+                        "Dərs tapılmadı",
+                        HttpStatusCode.BadRequest.GetHashCode()
+                    );
+                }
+
+                return Response<Lesson>.Success(
+                    lesson,
+                    HttpStatusCode.OK.GetHashCode()
                 );
             }
-
-            return Response<Lesson>.Success(
-                lesson,
-                HttpStatusCode.OK.GetHashCode()
-            );
+            catch (Exception ex)
+            {
+                return Response<Lesson>.Fail(ex.Message ?? "Gözlənilməz xəta baş verdi",
+                    HttpStatusCode.BadRequest.GetHashCode());
+            }
         }
     }
 }

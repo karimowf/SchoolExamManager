@@ -10,7 +10,7 @@ namespace SchoolLessonManager.Domain.Repositories.StudentRepositories
     public interface IStudentRepository
     {
         Task AddAsync(Student student);
-        Task<Student?> GetByNumberAsync(int number);
+        Task<Student?> GetByNumberAsync(int? number);
         IQueryable<Student> GetAllQueryable();
     }
 }

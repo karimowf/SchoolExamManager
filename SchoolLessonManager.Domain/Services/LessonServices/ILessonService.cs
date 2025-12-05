@@ -12,6 +12,6 @@ namespace SchoolLessonManager.Domain.Services.LessonServices
     {
         Task<Response<Lesson>> AddLessonAsync(Lesson lesson);
         Task<Response<Lesson>> GetByCodeAsync(string code);
-        Task<List<Lesson>> GetFilteredAsync(string? code, string? name, string? teacher, int? grade);
+        Task<Response<List<Lesson>>> GetFilteredAsync(string? code, string? name, string? teacher, int? grade);
     }
 }

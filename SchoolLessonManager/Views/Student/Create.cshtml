@@ -31,6 +31,9 @@
 
 <form asp-action="Create" method="post">
 
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+
     <div class="mb-3">
         <label class="form-label fw-bold">Şagird Nömrəsi</label>
         <input asp-for="Number" class="form-control" />

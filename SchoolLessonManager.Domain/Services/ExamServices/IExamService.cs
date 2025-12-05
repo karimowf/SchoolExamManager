@@ -11,7 +11,7 @@ namespace SchoolLessonManager.Domain.Services.ExamServices
     public interface IExamService
     {
         Task<Response<Exam>> AddExamAsync(Exam exam);
-        Task<List<Exam>> GetFilteredAsync(string? lesson, string? student,
+        Task<Response<List<Exam>>> GetFilteredAsync(string? lesson, string? student,
                                      DateTime? from, DateTime? to);
     }
 }

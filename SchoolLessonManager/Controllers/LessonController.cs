@@ -38,10 +38,12 @@ namespace SchoolLessonManager.Presentation.Controllers
 
             if (!response.IsSuccessfully)
             {
-                var error = response.Errors?.FirstOrDefault() ?? "Unknown error";
+                var error = response.Errors?.FirstOrDefault() ?? "Naməlum xəta";
                 ModelState.AddModelError("", error);
                 return View(model);
             }
+
+            HttpContext.Session.SetString("LessonCode", model.Code);
 
 
             return RedirectToAction("Create", "Student");

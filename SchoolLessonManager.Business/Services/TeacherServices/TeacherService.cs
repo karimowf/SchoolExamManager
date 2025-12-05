@@ -10,19 +10,33 @@ namespace SchoolLessonManager.Business.Services.TeacherServices
     {
         public async Task<Response<Teacher>> AddTeacherAsync(Teacher teacher)
         {
-            await unitOfWork.TeacherRepository.AddTeacherAsync(teacher);
-            await unitOfWork.CommitAsync();
-            return Response<Teacher>.Success(teacher, HttpStatusCode.OK.GetHashCode());
+            try
+            {
+                await unitOfWork.TeacherRepository.AddTeacherAsync(teacher);
+                await unitOfWork.CommitAsync();
+                return Response<Teacher>.Success(teacher, HttpStatusCode.OK.GetHashCode());
+            }
+            catch (Exception ex)
+            {
+                return Response<Teacher>.Fail(ex.Message ?? "Gözlənilməz xəta baş verdi", HttpStatusCode.BadRequest.GetHashCode());
+            }
         }
 
         public async Task<Response<Teacher>> GetByNameAsync(string firstName, string lastName)
         {
-            var teacher = await unitOfWork.TeacherRepository.GetByNameAsync(firstName, lastName);
+            try
+            {
+                var teacher = await unitOfWork.TeacherRepository.GetByNameAsync(firstName, lastName);
 
-            if (teacher is null)
-                return Response<Teacher>.Fail("Teacher not found.", HttpStatusCode.BadRequest.GetHashCode());
+                if (teacher is null)
+                    return Response<Teacher>.Fail("Müəllim tapılmadı", HttpStatusCode.BadRequest.GetHashCode());
 
-            return Response<Teacher>.Success(teacher, HttpStatusCode.OK.GetHashCode());
+                return Response<Teacher>.Success(teacher, HttpStatusCode.OK.GetHashCode());
+            }
+            catch (Exception ex)
+            {
+                return Response<Teacher>.Fail(ex.Message ?? "Gözlənilməz xəta baş verdi", HttpStatusCode.BadRequest.GetHashCode());
+            }
         }
     }
 }
