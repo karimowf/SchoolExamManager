@@ -1,0 +1,32 @@
+﻿@model SchoolLessonManager.Presentation.Models.Exams.ExamViewModel
+
+<h2>İmtahan Qeydiyyatı</h2>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label class="fw-bold">Dərsin Kodu</label>
+        <input asp-for="LessonCode" class="form-control" />
+        <span asp-validation-for="LessonCode" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="fw-bold">Şagird Nömrəsi</label>
+        <input asp-for="StudentNumber" class="form-control" />
+        <span asp-validation-for="StudentNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="fw-bold">İmtahan Tarixi</label>
+        <input asp-for="ExamDate" type="date" class="form-control" />
+        <span asp-validation-for="ExamDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="fw-bold">Qiymət</label>
+        <input asp-for="Score" class="form-control" />
+        <span asp-validation-for="Score" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Yadda Saxla</button>
+</form>

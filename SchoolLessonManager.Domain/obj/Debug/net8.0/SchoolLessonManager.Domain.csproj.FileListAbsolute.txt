@@ -1,0 +1,16 @@
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\bin\Debug\net8.0\SchoolLessonManager.Domain.deps.json
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\bin\Debug\net8.0\SchoolLessonManager.Domain.dll
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\bin\Debug\net8.0\SchoolLessonManager.Domain.pdb
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\SchoolLessonManager.Domain.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\SchoolLessonManager.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\SchoolLessonManager.Domain.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\SchoolLessonManager.Domain.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\SchoolLessonManager.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\SchoolLessonManager.Domain.sourcelink.json
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\SchoolLessonManager.Domain.dll
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\refint\SchoolLessonManager.Domain.dll
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\SchoolLessonManager.Domain.pdb
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\ref\SchoolLessonManager.Domain.dll
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\bin\Debug\net8.0\SchoolLessonManager.Shared.dll
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\bin\Debug\net8.0\SchoolLessonManager.Shared.pdb
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Domain\obj\Debug\net8.0\SchoolLe.7BC787E1.Up2Date

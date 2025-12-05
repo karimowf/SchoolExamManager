@@ -1,0 +1,12 @@
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\bin\Debug\net8.0\SchoolLessonManager.Shared.deps.json
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\bin\Debug\net8.0\SchoolLessonManager.Shared.dll
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\bin\Debug\net8.0\SchoolLessonManager.Shared.pdb
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\obj\Debug\net8.0\SchoolLessonManager.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\obj\Debug\net8.0\SchoolLessonManager.Shared.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\obj\Debug\net8.0\SchoolLessonManager.Shared.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\obj\Debug\net8.0\SchoolLessonManager.Shared.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\obj\Debug\net8.0\SchoolLessonManager.Shared.sourcelink.json
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\obj\Debug\net8.0\SchoolLessonManager.Shared.dll
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\obj\Debug\net8.0\refint\SchoolLessonManager.Shared.dll
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\obj\Debug\net8.0\SchoolLessonManager.Shared.pdb
+C:\Users\ASUS\source\repos\SchoolLessonManager\SchoolLessonManager.Shared\obj\Debug\net8.0\ref\SchoolLessonManager.Shared.dll
