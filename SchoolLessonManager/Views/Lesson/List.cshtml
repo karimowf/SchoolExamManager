@@ -1,0 +1,101 @@
+﻿@using SchoolLessonManager.Domain.Entities
+@model List<Lesson>
+
+<style>
+    body {
+        background: url('https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg?auto=compress&cs=tinysrgb&w=1920')
+                    no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .content-box {
+        background: rgba(255,255,255,0.85);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.25);
+        margin-top: 20px;
+    }
+
+    h2 {
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        font-weight: 700;
+        color: #222;
+    }
+</style>
+
+<div class="content-box">
+
+    <h2 class="mb-4">Dərslər</h2>
+
+    <form method="get" class="mb-4">
+
+        <div class="row g-2">
+
+            <div class="col-md-3">
+                <input name="code" class="form-control"
+                       placeholder="Kod"
+                       value="@Context.Request.Query["code"]" />
+            </div>
+
+            <div class="col-md-3">
+                <input name="name" class="form-control"
+                       placeholder="Dərsin adı"
+                       value="@Context.Request.Query["name"]" />
+            </div>
+
+            <div class="col-md-3">
+                <input name="teacher" class="form-control"
+                       placeholder="Ad və ya Soyad"
+                       value="@Context.Request.Query["teacher"]" />
+            </div>
+
+            <div class="col-md-3">
+                <input name="grade" type="number" class="form-control"
+                       placeholder="Sinif"
+                       value="@Context.Request.Query["grade"]" />
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Axtar</button>
+
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Kod</th>
+                <th>Adı</th>
+                <th>Sinif</th>
+                <th>Müəllimin Adı</th>
+                <th>Müəllimin Soyadı</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-muted">
+                        Heç bir dərs tapılmadı.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var l in Model)
+                {
+                    <tr>
+                        <td>@l.Code</td>
+                        <td>@l.Name</td>
+                        <td>@l.GradeLevel</td>
+                        <td>@l.Teacher?.FirstName</td>
+                        <td>@l.Teacher?.LastName</td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+
+</div>

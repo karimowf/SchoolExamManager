@@ -1,0 +1,94 @@
+﻿@using SchoolLessonManager.Domain.Entities
+@model List<Exam>
+
+<style>
+    body {
+        background: url('https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=1920')
+                    no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .content-box {
+        background: rgba(255,255,255,0.85);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.25);
+        margin-top: 20px;
+    }
+
+    h2 {
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        color: #222;
+        font-weight: 700;
+    }
+</style>
+
+<div class="content-box">
+
+    <h2>İmtahanlar</h2>
+
+    <!-- FILTER FORM -->
+    <form method="get" class="row mb-4">
+
+        <div class="col-3">
+            <label class="form-label fw-bold">Dərs</label>
+            <input name="lesson"
+                   class="form-control"
+                   value="@Context.Request.Query["lesson"]"
+                   placeholder="Dərs adı və ya kodu" />
+        </div>
+
+        <div class="col-3">
+            <label class="form-label fw-bold">Şagird</label>
+            <input name="student"
+                   class="form-control"
+                   value="@Context.Request.Query["student"]"
+                   placeholder="Ad və ya Soyad" />
+        </div>
+
+        <div class="col-2">
+            <label class="form-label fw-bold">Tarixdən</label>
+            <input type="date"
+                   name="from"
+                   class="form-control"
+                   value="@Context.Request.Query["from"]" />
+        </div>
+
+        <div class="col-2">
+            <label class="form-label fw-bold">Tarixə qədər</label>
+            <input type="date"
+                   name="to"
+                   class="form-control"
+                   value="@Context.Request.Query["to"]" />
+        </div>
+
+        <div class="col-2 d-flex align-items-end">
+            <button class="btn btn-primary w-100">Axtar</button>
+        </div>
+
+    </form>
+
+    <!-- RESULT TABLE -->
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Dərs</th>
+                <th>Şagird</th>
+                <th>Tarix</th>
+                <th>Qiymət</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var e in Model)
+            {
+                <tr>
+                    <td>@e.Lesson?.Name (@e.Lesson?.Code)</td>
+                    <td>@e.Student?.FirstName @e.Student?.LastName</td>
+                    <td>@e.ExamDate.ToShortDateString()</td>
+                    <td>@e.Score</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

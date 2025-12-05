@@ -11,5 +11,6 @@ namespace SchoolLessonManager.Domain.Repositories.StudentRepositories
     {
         Task AddAsync(Student student);
         Task<Student?> GetByNumberAsync(int number);
+        IQueryable<Student> GetAllQueryable();
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolLessonManager.Domain.Entities;
 using SchoolLessonManager.Domain.Services.RegistrationServices;
+using SchoolLessonManager.Domain.Services.StudentServices;
 using SchoolLessonManager.Presentation.Models.Students;
 
 namespace SchoolLessonManager.Presentation.Controllers
 {
-    public class StudentController(IStudentRegistrationService studentRegistrationService) : Controller
+    public class StudentController(IStudentRegistrationService studentRegistrationService, IStudentService studentService) : Controller
     {
         [HttpGet]
         public IActionResult Create()
@@ -37,6 +38,18 @@ namespace SchoolLessonManager.Presentation.Controllers
             }
 
             return RedirectToAction("Create", "Exam");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List(StudentFilterViewModel filter)
+        {
+            var students = await studentService.GetFilteredAsync(
+                filter.Number,
+                filter.First,
+                filter.Last,
+                filter.Grade);
+
+            return View(students);
         }
     }
 }

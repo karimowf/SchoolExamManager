@@ -1,4 +1,5 @@
-﻿using SchoolLessonManager.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolLessonManager.Domain.Entities;
 using SchoolLessonManager.Domain.Services.StudentServices;
 using SchoolLessonManager.Domain.UnitOfWorks;
 using SchoolLessonManager.Shared.Responses;
@@ -43,5 +44,29 @@ namespace SchoolLessonManager.Business.Services.StudentServices
                 HttpStatusCode.OK.GetHashCode()
             );
         }
+
+        public async Task<List<Student>> GetFilteredAsync(
+     string? number,
+     string? first,
+     string? last,
+     int? grade)
+        {
+            var query = unitOfWork.StudentRepository.GetAllQueryable();
+
+            if (!string.IsNullOrWhiteSpace(number) && int.TryParse(number, out int num))
+                query = query.Where(s => s.Number == num);
+
+            if (!string.IsNullOrWhiteSpace(first))
+                query = query.Where(s => s.FirstName.Contains(first));
+
+            if (!string.IsNullOrWhiteSpace(last))
+                query = query.Where(s => s.LastName.Contains(last));
+
+            if (grade.HasValue)
+                query = query.Where(s => s.GradeLevel == grade.Value);
+
+            return await query.ToListAsync();
+        }
+
     }
 }

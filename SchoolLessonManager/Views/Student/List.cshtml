@@ -1,0 +1,98 @@
+﻿@using SchoolLessonManager.Domain.Entities
+@model List<Student>
+
+<style>
+    body {
+        background: url('https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=1920')
+                    no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .content-box {
+        background: rgba(255,255,255,0.85);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.25);
+        margin-top: 20px;
+    }
+
+    h2 {
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        font-weight: 700;
+        color: #222;
+    }
+</style>
+
+<div class="content-box">
+
+    <h2 class="mb-4">Şagirdlər</h2>
+
+    <form method="get" class="mb-4">
+
+        <div class="row g-2">
+
+            <div class="col-md-3">
+                <input name="number" class="form-control"
+                       placeholder="Nömrə"
+                       value="@Context.Request.Query["number"]" />
+            </div>
+
+            <div class="col-md-3">
+                <input name="first" class="form-control"
+                       placeholder="Ad"
+                       value="@Context.Request.Query["first"]" />
+            </div>
+
+            <div class="col-md-3">
+                <input name="last" class="form-control"
+                       placeholder="Soyad"
+                       value="@Context.Request.Query["last"]" />
+            </div>
+
+            <div class="col-md-3">
+                <input name="grade" type="number" class="form-control"
+                       placeholder="Sinif"
+                       value="@Context.Request.Query["grade"]" />
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Axtar</button>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Nömrə</th>
+                <th>Adı</th>
+                <th>Soyadı</th>
+                <th>Sinif</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model == null || !Model.Any())
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-muted">
+                        Heç bir şagird tapılmadı.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.Number</td>
+                        <td>@s.FirstName</td>
+                        <td>@s.LastName</td>
+                        <td>@s.GradeLevel</td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+
+</div>

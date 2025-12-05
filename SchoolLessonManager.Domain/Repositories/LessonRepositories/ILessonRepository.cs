@@ -6,5 +6,6 @@ namespace SchoolLessonManager.Domain.Repositories.LessonRepositories
     {
         Task AddAsync(Lesson lesson);
         Task<Lesson?> GetByCodeAsync(string code);
+        IQueryable<Lesson> GetAllQueryable();
     }
 }

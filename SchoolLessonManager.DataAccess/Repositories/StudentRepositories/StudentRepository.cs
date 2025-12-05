@@ -24,6 +24,10 @@ namespace SchoolLessonManager.DataAccess.Repositories.StudentRepositories
             return await _context.Students
                 .FirstOrDefaultAsync(s => s.Number == number);
         }
-    }
 
+        public IQueryable<Student> GetAllQueryable()
+        {
+            return _context.Students.AsQueryable();
+        }
+    }
 }

@@ -19,6 +19,12 @@ namespace SchoolLessonManager.DataAccess.Repositories.LessonRepositories
             await _context.Lessons.AddAsync(lesson);
         }
 
+        public IQueryable<Lesson> GetAllQueryable()
+        {
+            return _context.Lessons.AsQueryable();
+        }
+
+
         public async Task<Lesson?> GetByCodeAsync(string code)
         {
             return await _context.Lessons

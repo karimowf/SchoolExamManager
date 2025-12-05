@@ -12,5 +12,6 @@ namespace SchoolLessonManager.Domain.Services.StudentServices
     {
         Task<Response<Student>> AddAsync(Student student);
         Task<Response<Student>> GetByNumberAsync(int number);
+        Task<List<Student>> GetFilteredAsync(string? number, string? first, string? last, int? grade);
     }
 }

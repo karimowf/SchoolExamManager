@@ -57,6 +57,10 @@
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
+
+        .menu-btn {
+            width: 260px;
+        }
     </style>
 </head>
 
@@ -66,9 +70,28 @@
 
         <p class="mb-5">Qeydiyyata başlamaq üçün düyməyə basın.</p>
 
-        <a asp-controller="Lesson" asp-action="Create" class="btn btn-primary btn-lg">
+        <a asp-controller="Lesson" asp-action="Create" class="btn btn-primary btn-lg menu-btn mb-4">
             Qeydiyyata Başla
         </a>
+
+        <hr class="border-light mb-4" />
+
+        <div class="d-flex flex-column align-items-center gap-3">
+
+            <a asp-controller="Lesson" asp-action="List" class="btn btn-light btn-lg menu-btn">
+                📘 Dərslərə Bax
+            </a>
+
+            <a asp-controller="Student" asp-action="List" class="btn btn-light btn-lg menu-btn">
+                👨‍🎓 Şagirdlərə Bax
+            </a>
+
+            <a asp-controller="Exam" asp-action="List" class="btn btn-light btn-lg menu-btn">
+                📝 İmtahanlara Bax
+            </a>
+
+        </div>
+
     </div>
 </body>
 </html>

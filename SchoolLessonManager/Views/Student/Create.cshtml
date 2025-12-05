@@ -1,27 +1,63 @@
 ﻿@model SchoolLessonManager.Presentation.Models.Students.StudentViewModel
 
-<h2>Şagird Qeydiyyatı</h2>
+@{
+    ViewData["Title"] = "Şagird Qeydiyyatı";
+}
+
+<style>
+    body {
+        background: url('https://images.pexels.com/photos/3184639/pexels-photo-3184639.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    form {
+        background: rgba(255,255,255,0.85);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        max-width: 700px;
+        margin: 40px auto;
+    }
+
+    h2 {
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        color: #222;
+        text-align: center;
+    }
+</style>
+
+
+<h2 class="mb-4">Şagird Qeydiyyatı</h2>
 
 <form asp-action="Create" method="post">
+
     <div class="mb-3">
-        <label>Şagird Nömrəsi</label>
+        <label class="form-label fw-bold">Şagird Nömrəsi</label>
         <input asp-for="Number" class="form-control" />
+        <span asp-validation-for="Number" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label>Adı</label>
+        <label class="form-label fw-bold">Adı</label>
         <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label>Soyadı</label>
+        <label class="form-label fw-bold">Soyadı</label>
         <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label>Sinifi</label>
+        <label class="form-label fw-bold">Sinifi</label>
         <input asp-for="GradeLevel" class="form-control" />
+        <span asp-validation-for="GradeLevel" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Yadda saxla və Növbəti</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
