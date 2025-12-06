@@ -26,28 +26,18 @@ namespace SchoolLessonManager.Presentation.Controllers
 
             int.TryParse(sessionStudent, out int sessionStudentNumber);
 
-            if (sessionLesson != model.LessonCode)
-            {
-                ModelState.AddModelError("", "Daxil edilən dərs kodu əvvəlki mərhələdə seçilən dərslə uyğun gəlmir.");
-                return View(model);
-            }
-
-            if (sessionStudentNumber != model.StudentNumber)
-            {
-                ModelState.AddModelError("", "Daxil edilən şagird nömrəsi əvvəlki mərhələdə seçilən şagirdlə uyğun gəlmir.");
-                return View(model);
-            }
-
             var exam = new Exam
             {
                 ExamDate = model.ExamDate,
-                Score = model.Score,
+                Score = model.Score
             };
 
             var response = await examRegistrationService.RegisterAsync(
                 exam,
                 model.LessonCode,
-                model.StudentNumber
+                model.StudentNumber,
+                sessionLesson,
+                sessionStudentNumber
             );
 
             if (!response.IsSuccessfully)
@@ -69,7 +59,7 @@ namespace SchoolLessonManager.Presentation.Controllers
                 filter.From,
                 filter.To);
 
-            return View(exams);
+            return View(exams.Data);
         }
 
         [HttpGet]

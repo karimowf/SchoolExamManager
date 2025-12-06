@@ -12,7 +12,8 @@ namespace SchoolLessonManager.Domain.Services.RegistrationServices
     {
         public interface IExamRegistrationService
         {
-            Task<Response<Exam>> RegisterAsync(Exam exam, string lessonCode, int? studentNumber);
+            Task<Response<Exam>> RegisterAsync(Exam exam, string lessonCode, int? studentNumber, string? sessionLesson,
+                    int? sessionStudent);
         }
     }
 }

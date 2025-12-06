@@ -24,10 +24,19 @@ namespace SchoolLessonManager.Business.Services.RegistrationServices
             _examService = examService;
         }
 
-        public async Task<Response<Exam>> RegisterAsync(Exam exam, string lessonCode, int? studentNumber)
+        public async Task<Response<Exam>> RegisterAsync(Exam exam, string lessonCode, int? studentNumber, string? sessionLesson,
+        int? sessionStudent)
         {
             try
             {
+                if (sessionLesson != lessonCode)
+                    return Response<Exam>.Fail("Daxil edilən dərs kodu əvvəlki mərhələdə seçilən dərslə uyğun gəlmir",
+                        HttpStatusCode.BadRequest.GetHashCode());
+
+                if (sessionStudent != studentNumber)
+                    return Response<Exam>.Fail("Daxil edilən şagird nömrəsi əvvəlki mərhələdə seçilən şagirdlə uyğun gəlmir",
+                        HttpStatusCode.BadRequest.GetHashCode());
+
                 var lesson = await _lessonService.GetByCodeAsync(lessonCode);
                 if (lesson.Data == null)
                     return Response<Exam>.Fail("Dərs tapılmadı", HttpStatusCode.BadRequest.GetHashCode());

@@ -65,7 +65,6 @@ namespace SchoolLessonManager.Business.Services.RegistrationServices
                 return Response<Lesson>.Fail(ex.Message ?? "Gözlənilməz xəta baş verdi", HttpStatusCode.BadRequest.GetHashCode());
             }
         }
-
     }
 
 }

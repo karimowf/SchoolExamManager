@@ -58,7 +58,7 @@ namespace SchoolLessonManager.Presentation.Controllers
                 filter.Teacher,
                 filter.Grade);
 
-            return View(lessons);
+            return View(lessons.Data);
         }
     }
 }
